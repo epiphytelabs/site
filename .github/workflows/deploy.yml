@@ -4,11 +4,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v1
       - id: ipfs
         name: Push to IPFS
         uses: epiphytelabs/action-ipfs@master
         with:
           path: .
+          service: infura
           verbose: true
       - id: cloudflare
         name: Update DNS
