@@ -44,4 +44,4 @@ jobs:
           token: "${{ github.token }}"
           state: "failure"
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-          target_url: https://epiphytelabs.io
+          environment_url: https://epiphytelabs.io
