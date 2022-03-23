@@ -11,6 +11,10 @@ jobs:
         uses: epiphytelabs/action-ipfs@master
         with:
           path: ./
+          service: pinata
+          pinataPinName: epiphytelabs.io
+          pinataKey: ${{ secrets.PINATA_KEY }}
+          pinataSecret: ${{ secrets.PINATA_SECRET }}
       - id: cloudflare
         name: Update DNS
         uses: epiphytelabs/action-cloudflare-dnslink@master
