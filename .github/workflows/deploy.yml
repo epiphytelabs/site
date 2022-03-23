@@ -1,0 +1,15 @@
+name: deploy
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ipfs
+        uses: epiphytelabs/ipfs-action@v1
+        with:
+          path: ./
+          service: infura
+          key: epiphytelabs.io
