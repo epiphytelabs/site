@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ipfs
-        uses: epiphytelabs/ipfs-action@v1
+        uses: epiphytelabs/ipfs-action@master
         with:
           path: ./
           service: infura
