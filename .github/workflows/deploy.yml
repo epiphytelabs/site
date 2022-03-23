@@ -8,9 +8,8 @@ jobs:
         name: Push to IPFS
         uses: epiphytelabs/action-ipfs@master
         with:
-          path: ./
-          service: infura
           key: epiphytelabs.io
+          path: ./
       - id: cloudflare
         name: Update DNS
         uses: epiphytelabs/action-cloudflare-dnslink@master
