@@ -5,8 +5,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ipfs
-        uses: epiphytelabs/ipfs-action@master
+        uses: epiphytelabs/action-ipfs@master
         with:
           path: ./
           service: infura
           key: epiphytelabs.io
+      - name: cloudflare
+        uses: epiphytelabs/action-cloudflare-dnslink@master
+        env:
+          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          RECORD_DOMAIN: epiphytelabs.io
+          RECORD_NAME: _dnslink
+        with:
+          cid: ${{ steps.ipfs.outputs.cid }}
