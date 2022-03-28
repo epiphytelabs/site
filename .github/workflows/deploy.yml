@@ -6,6 +6,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
+      - name: Lint
+        run: npx prettier --check *.html
       - id: ipfs
         name: Push to IPFS
         uses: epiphytelabs/action-ipfs@master
