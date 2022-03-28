@@ -29,6 +29,7 @@ jobs:
           cid: ${{ steps.ipfs.outputs.cid }}
       - name: Create deployment
         uses: chrnorm/deployment-action@releases/v1
+        if: always()
         with:
           token: ${{ github.token }}
           initial_status: ${{ job.status }}
