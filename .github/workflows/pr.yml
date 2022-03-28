@@ -1,0 +1,31 @@
+name: pr
+on: [pull_request]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Lint
+        run: npx prettier --check dist/*.html
+      - id: ipfs
+        name: Push to IPFS
+        uses: epiphytelabs/action-ipfs@master
+        with:
+          path: dist
+      - id: pinata
+        name: Pin with Pinata
+        uses: epiphytelabs/action-pinata@master
+        with:
+          cid: ${{ steps.ipfs.outputs.cid }}
+          key: ${{ secrets.PINATA_KEY }}
+          secret: ${{ secrets.PINATA_SECRET }}
+      - name: Create deployment
+        uses: chrnorm/deployment-action@releases/v1
+        if: always()
+        with:
+          token: ${{ github.token }}
+          ref: ${{ github.head_ref }}
+          initial_status: ${{ job.status }}
+          target_url: https://gateway.ipfs.io/ipfs/${{ steps.ipfs.outputs.cid }}
+          environment: preview
