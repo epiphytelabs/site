@@ -15,18 +15,13 @@ jobs:
         name: Push to IPFS
         uses: epiphytelabs/action-ipfs@master
         with:
+          auth: ${{ secrets.IPFS_AUTH }}
           path: dist
-      - id: pinata
-        name: Pin with Pinata
-        uses: epiphytelabs/action-pinata@master
-        with:
-          cid: ${{ steps.ipfs.outputs.cid }}
-          key: ${{ secrets.PINATA_KEY }}
-          secret: ${{ secrets.PINATA_SECRET }}
       - id: ipns
         name: Publish to IPNS
         uses: epiphytelabs/action-ipns@master
         with:
+          auth: ${{ secrets.IPFS_AUTH }}
           cid: ${{ steps.ipfs.outputs.cid }}
       - name: Create deployment
         uses: chrnorm/deployment-action@releases/v1
@@ -34,4 +29,5 @@ jobs:
         with:
           token: ${{ github.token }}
           initial_status: ${{ job.status }}
+          target_url: https://epiphytelabs.io
           environment: production
