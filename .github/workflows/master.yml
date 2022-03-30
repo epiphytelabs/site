@@ -29,4 +29,5 @@ jobs:
         with:
           token: ${{ github.token }}
           initial_status: ${{ job.status }}
+          target_url: https://epiphytelabs.io
           environment: production
